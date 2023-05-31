@@ -1,21 +1,24 @@
-    function inicializar(){
+    function inicializar(pageSelected){
     console.log("on load se ha llamado");
 
-    let usersNumber = 10;
-    const http = new XMLHttpRequest();
+    let usersNumber = 5;
+    const peticion = new XMLHttpRequest();
 
-        http.onreadystatechange = function(){
-    console.log(this.readyState);
-    if(this.readyState === 4 && this.status === 200){
+        peticion.onreadystatechange = function(){
+        console.log(this.readyState);
+        if(this.readyState === 4 && this.status === 200){
 
         console.log(this.responseText);
         const listaUsuarios = JSON.parse(this.responseText);
         new ListaUsuarios(listaUsuarios.data).render();
+        new Paginas(listaUsuarios).render();
+        console.log(listaUsuarios.data);
         }
     }
-        http.open("GET", `https://dummyapi.io/data/v1/user?limit=${usersNumber}&page=1`);
-        http.setRequestHeader("app-id", "6470cb07b1bb3876c0d9c81c");
-        http.send();
+        let url = `https://dummyapi.io/data/v1/user?page=${pageSelected}&limit=${usersNumber}`;
+        peticion.open("GET", url, true);
+        peticion.setRequestHeader("app-id", "6470cb07b1bb3876c0d9c81c");
+        peticion.send();
     }
 
 
@@ -37,16 +40,22 @@ function ListaUsuarios(listaUsuarios){
         listaUsuariosDiv.innerHTML += "</ol>";
         listaUsuariosDiv.innerHTML += "</a>";
     };
-    // let paginacion = "";
-    // let usuarios = 0;
-    // for (let i = 1; i <= usuarios.total / usuarios.limit; i++) {
-    //     paginacion += `<a href="#" onclick="init(${i})">${i}</a>, `;
-    // }
 
-    // let ultimaPagina = parseInt(usuarios.total / usuarios.limit) + 1;
-    // paginacion += `<a href="#" onclick="init(${ultimaPagina})">${ultimaPagina}</a>`;
+}
 
-    // paginationElement.innerHTML = paginacion;
+    function Paginas(listaUsuarios){
+    this.listaUsuarios= listaUsuarios;
+    this.render = function(){
+        
+        let paginacionDiv = document.getElementById("paginacion");
+        let numeroPaginas = listaUsuarios.total / listaUsuarios.limit;
+
+        paginacionDiv.innerHTML = "";
+        for (let i = 1; i <= numeroPaginas; i++) {
+        paginacionDiv.innerHTML += `<a href="#" onclick="init(${i})">${i}</a>, `;
+        }
+    }
+    
 }
 
 function initUsersDetails(){

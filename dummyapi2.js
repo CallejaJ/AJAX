@@ -1,4 +1,4 @@
-function init(){
+function inicializar2(){
     
     // vamos a crear un nuevo objeto-llamada
     let peticion = new XMLHttpRequest();
