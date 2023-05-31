@@ -1,14 +1,15 @@
-    function inicializar(pageSelected){
-    console.log("on load se ha llamado");
+    function inicializar(pageSelected = 0){
+    console.log("onload se ha llamado");
 
-    let usersNumber = 5;
+    let usersNumber = 10;
     const peticion = new XMLHttpRequest();
 
         peticion.onreadystatechange = function(){
         console.log(this.readyState);
+        
         if(this.readyState === 4 && this.status === 200){
-
         console.log(this.responseText);
+        
         const listaUsuarios = JSON.parse(this.responseText);
         new ListaUsuarios(listaUsuarios.data).render();
         new Paginas(listaUsuarios).render();
@@ -29,7 +30,6 @@ function ListaUsuarios(listaUsuarios){
     this.render = function(){
 
         let listaUsuariosDiv = document.getElementById("listaUsuarios");
-        // let paginationElement = document.getElementById("paginacion")
         listaUsuariosDiv.innerHTML = "<ol>";
 
         for(let usuario of listaUsuarios){
@@ -37,8 +37,7 @@ function ListaUsuarios(listaUsuarios){
         listaUsuariosDiv.innerHTML += `<li> ${usuario.title} ${usuario.firstName} ${usuario.lastName}</li>`;
         listaUsuariosDiv.innerHTML += "<li><a href='dummyapi_detalle.html?id=" + usuario.id + "'>More details";
     }
-        listaUsuariosDiv.innerHTML += "</ol>";
-        listaUsuariosDiv.innerHTML += "</a>";
+        
     };
 
 }
@@ -52,7 +51,7 @@ function ListaUsuarios(listaUsuarios){
 
         paginacionDiv.innerHTML = "";
         for (let i = 1; i <= numeroPaginas; i++) {
-        paginacionDiv.innerHTML += `<a href="#" onclick="init(${i})">${i}</a>, `;
+        paginacionDiv.innerHTML += `<a href="#" onclick="inicializar(${i})">${i}</a>, `;
         }
     }
     
