@@ -1,0 +1,29 @@
+.bodyuserlist{ 
+    height: 140px;
+    width: 140px;
+    border-radius: 25%;
+    justify-content: center;
+    background-color: rgba(28, 146, 214, 0.781);
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    margin: 12;
+    font-size: 16px;
+    font-style: italic;
+    font-display: inherit;
+    border-color: blue;
+    align-items: center;
+}
+
+.resize{
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    font-family: 'Inter', sans-serif;
+    margin: 12;
+    font-size: 20px;
+    font-style: italic;
+}
+.bodyuserdetails{ 
+    height: 150px;
+    width: 150px;
+    background-color: rgb(74, 124, 141);
+}

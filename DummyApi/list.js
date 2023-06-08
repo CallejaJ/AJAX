@@ -1,4 +1,4 @@
-    function inicializar(pageSelected = 0){
+    function list(pageSelected = 0){
     console.log("onload se ha llamado");
 
     let usersNumber = 10;
@@ -35,7 +35,7 @@ function ListaUsuarios(listaUsuarios){
         for(let usuario of listaUsuarios){
         listaUsuariosDiv.innerHTML += `<li><img class="resize" src="${usuario.picture}"></li>`;
         listaUsuariosDiv.innerHTML += `<li> ${usuario.title} ${usuario.firstName} ${usuario.lastName}</li>`;
-        listaUsuariosDiv.innerHTML += "<li><a href='dummyapi_detalle.html?id=" + usuario.id + "'>More details";
+        listaUsuariosDiv.innerHTML += "<li><a href='detalle.html?id=" + usuario.id + "'>More details";
     }
         
     };
@@ -51,7 +51,7 @@ function ListaUsuarios(listaUsuarios){
 
         paginacionDiv.innerHTML = "";
         for (let i = 1; i <= numeroPaginas; i++) {
-        paginacionDiv.innerHTML += `<a href="#" onclick="inicializar(${i})">${i}</a>, `;
+        paginacionDiv.innerHTML += `<a href="#" onclick="list(${i})">${i}</a>, `;
         }
     }
     
@@ -68,7 +68,7 @@ function initUsersDetails(){
             console.log("usuario");
             userDetails.innerHTML = 
             `<p>
-            <img src="${usuario.picture}"> 
+            <img class="resize" src="${usuario.picture}"> 
             </p>
             <p>
             <b>ID</b>:${usuario.id}
